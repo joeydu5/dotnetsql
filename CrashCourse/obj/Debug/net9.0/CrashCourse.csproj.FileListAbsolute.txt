@@ -1,0 +1,14 @@
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/bin/Debug/net9.0/CrashCourse
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/bin/Debug/net9.0/CrashCourse.deps.json
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/bin/Debug/net9.0/CrashCourse.runtimeconfig.json
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/bin/Debug/net9.0/CrashCourse.dll
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/bin/Debug/net9.0/CrashCourse.pdb
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/CrashCourse.GeneratedMSBuildEditorConfig.editorconfig
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/CrashCourse.AssemblyInfoInputs.cache
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/CrashCourse.AssemblyInfo.cs
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/CrashCourse.csproj.CoreCompileInputs.cache
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/CrashCourse.dll
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/refint/CrashCourse.dll
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/CrashCourse.pdb
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/CrashCourse.genruntimeconfig.cache
+/Users/joedu/Desktop/code/dotnet-sql-course/CrashCourse/CrashCourse/obj/Debug/net9.0/ref/CrashCourse.dll
