@@ -7,18 +7,24 @@ var dapper = new DataContextDapper();
 
 var rightNow = dapper.LoadDataSingle<DateTime>("SELECT GETDATE()");
 
+var entityFramework = new DataContextEF();
+
 Console.WriteLine(rightNow);
 
 var myComputer = new Computer
 {
-    Motherboard = "Z690",
+    Motherboard = "ASUS ROG STRIX Z490-E",
     HasWifi = true,
-    HasLTE = true,
-    CPUCores = 4,
+    HasLTE = false,
+    CPUCores = 12,
     ReleaseDate = DateTime.Now,
-    Price = 943.87m,
-    VideoCard = "RTX2060"
+    Price = 1500.00m,
+    VideoCard = "RTX5070"
 };
+
+// using EF to add a new row in the DB table.
+entityFramework.Add(myComputer);
+entityFramework.SaveChanges();
 
 var sql = @"INSERT INTO TutorialAppSchema.Computer(
 Motherboard,
@@ -40,8 +46,8 @@ VALUES('" + myComputer.Motherboard
 // int res = dbConnection.Execute(sql);
 // Console.WriteLine(res);
 
-var result = dapper.ExecuteSql(sql);
-Console.WriteLine(result);
+// var result = dapper.ExecuteSql(sql);
+// Console.WriteLine(result);
 
 var sqlSELECT = @"SELECT
     Computer.Motherboard,
@@ -53,15 +59,20 @@ var sqlSELECT = @"SELECT
     Computer.VideoCard
     FROM TutorialAppSchema.Computer";
 
-var computers = dapper.LoadData<Computer>(sqlSELECT);
+// var computers = dapper.LoadData<Computer>(sqlSELECT);
+
+var computersEf = entityFramework.Computer?.ToList<Computer>();
+
 
 Console.WriteLine(sqlSELECT);
 
-foreach (var computer in computers)
-    Console.WriteLine("Motherboard: " + computer.Motherboard + " "
-                      + "HasWifi: " + computer.HasWifi + " "
-                      + "HasLTE: " + computer.HasLTE + " "
-                      + "CPUCores: " + computer.CPUCores + " "
-                      + "ReleaseDate: " + computer.ReleaseDate + " "
-                      + "Price: " + computer.Price + " "
-                      + "VideoCard: " + computer.VideoCard);
+if (computersEf != null)
+    foreach (var computer in computersEf)
+        Console.WriteLine("Motherboard: " + computer.Motherboard + " "
+                          + "ComputerId: " + computer.ComputerId + " "
+                          + "HasWifi: " + computer.HasWifi + " "
+                          + "HasLTE: " + computer.HasLTE + " "
+                          + "CPUCores: " + computer.CPUCores + " "
+                          + "ReleaseDate: " + computer.ReleaseDate + " "
+                          + "Price: " + computer.Price + " "
+                          + "VideoCard: " + computer.VideoCard);
