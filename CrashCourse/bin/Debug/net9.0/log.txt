@@ -1,0 +1,23 @@
+
+INSERT INTO TutorialAppSchema.Computer(
+    Motherboard,
+    HasWifi,
+    HasLTE,
+    CPUCores,
+    ReleaseDate,
+    Price,
+    VideoCard)
+VALUES('ASUS ROG STRIX Z490-E','True','False','12','2026-04-04','1500.00','RTX5070')
+
+
+INSERT INTO TutorialAppSchema.Computer(
+    Motherboard,
+    HasWifi,
+    HasLTE,
+    CPUCores,
+    ReleaseDate,
+    Price,
+    VideoCard)
+VALUES('ASUS ROG STRIX Z490-E','True','False','12','2026-04-04','1500.00','RTX5070')
+
+

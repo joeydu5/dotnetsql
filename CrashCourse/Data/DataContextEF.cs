@@ -1,18 +1,25 @@
 using CrashCourse.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace CrashCourse.Data;
 
 public class DataContextEF : DbContext
 {
+    private IConfiguration _config;
+
+    public DataContextEF(IConfiguration config)
+    {
+        _config = config;
+    }
+
     public DbSet<Computer>? Computer { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder options)
     {
         if (!options.IsConfigured)
             options.UseSqlServer(
-                "Server=localhost;Database=DotNetCourseDatabase;TrustServerCertificate=true;Trusted_Connection=false;User ID=sa;Password=Password123;"
-                ,
+                _config.GetConnectionString("DefaultConnection"),
                 options => options.EnableRetryOnFailure());
     }
 
