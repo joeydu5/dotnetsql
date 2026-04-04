@@ -1,25 +1,34 @@
+using System.Text.Json.Serialization;
+using Newtonsoft.Json;
+
 namespace CrashCourse.Models;
 
 public class Computer
 {
-    public int ComputerId { get; set; }
-    public string Motherboard { get; set; }
-
-    // public int CPUCores { get; set; }
-    public bool HasWifi { get; set; }
-    public bool HasLTE { get; set; }
-
-    public int? CPUCores { get; set; }
-    public DateTime? ReleaseDate { get; set; }
-    public decimal Price { get; set; }
-    public string VideoCard { get; set; }
+    [JsonPropertyName("computer_id")] public int ComputerId { get; set; }
+    [JsonPropertyName("motherboard")] public string Motherboard { get; set; }
+    [JsonPropertyName("has_wifi")] public bool HasWifi { get; set; }
+    [JsonPropertyName("has_lte")] public bool HasLTE { get; set; }
+    [JsonPropertyName("cpu_cores")] public int? CPUCores { get; set; }
+    [JsonPropertyName("release_date")] public DateTime? ReleaseDate { get; set; }
+    [JsonPropertyName("price")] public decimal Price { get; set; }
+    [JsonPropertyName("video_card")] public string VideoCard { get; set; }
 
     public Computer()
     {
-        if (VideoCard == null) VideoCard = "";
+        if (VideoCard == null)
+        {
+            VideoCard = "";
+        }
 
-        if (Motherboard == null) Motherboard = "";
+        if (Motherboard == null)
+        {
+            Motherboard = "";
+        }
 
-        if (CPUCores == null) CPUCores = 0;
+        if (CPUCores == null)
+        {
+            CPUCores = 0;
+        }
     }
 }

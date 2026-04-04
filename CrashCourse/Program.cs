@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Text.Json;
+using AutoMapper;
 using CrashCourse.Data;
 using CrashCourse.Models;
 using Microsoft.Extensions.Configuration;
@@ -58,6 +59,50 @@ var entityFramework = new DataContextEF(config);
 //
 // Console.WriteLine(readFile);
 
+var computerJsonSnake = File.ReadAllText("ComputersSnake.json");
+Console.WriteLine(computerJsonSnake);
+
+var mapperConfig = new MapperConfiguration((cfg) =>
+{
+    cfg.CreateMap<ComputerSnake, Computer>()
+        .ForMember(destination => destination.ComputerId,
+            options => options.MapFrom(source => source.computer_id))
+        .ForMember(destination => destination.Motherboard,
+            options => options.MapFrom(source => source.motherboard))
+        .ForMember(destination => destination.CPUCores,
+            options => options.MapFrom(source => source.cpu_cores))
+        .ForMember(destination => destination.HasWifi,
+            options => options.MapFrom(source => source.has_wifi))
+        .ForMember(destination => destination.HasLTE,
+            options => options.MapFrom(source => source.has_lte))
+        .ForMember(destination => destination.ReleaseDate,
+            options => options.MapFrom(source => source.release_date))
+        .ForMember(destination => destination.Price,
+            options => options.MapFrom(source => source.price))
+        .ForMember(destination => destination.VideoCard,
+            options => options.MapFrom(source => source.video_card));
+}); // Source Model and Destination Model map ComputerSnake ---> Computer
+
+var mapper = new Mapper(mapperConfig);
+
+var computersSnakeJson = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<ComputerSnake>>(computerJsonSnake);
+// if (computerJsonSnake != null)
+// {
+//     var computersMapped = mapper.Map<IEnumerable<Computer>>(computersSnakeJson);
+//     foreach (var computer in computersMapped)
+//     {
+//         Console.WriteLine(computer.Motherboard);
+//     }
+// }
+
+var computersSystem = System.Text.Json.JsonSerializer.Deserialize<IEnumerable<Computer>>(computerJsonSnake);
+if (computersSystem != null)
+{
+    foreach (var computer in computersSystem)
+    {
+        Console.WriteLine(computer.Motherboard);
+    }
+}
 
 // Read JSON data
 var computersJson = File.ReadAllText("Computers.json");
@@ -83,6 +128,7 @@ var computersNewtonsoft = JsonConvert.DeserializeObject<IEnumerable<Computer>>(c
 
 // Print out on the screen
 if (computersNewtonsoft != null)
+{
     foreach (var computer in computersNewtonsoft)
     {
         var sql = @"INSERT INTO TutorialAppSchema.Computer(
@@ -102,16 +148,17 @@ if (computersNewtonsoft != null)
            + "','" + EscapeSingleQuotes(computer.VideoCard)
            + "')";
 
-        dapper.ExecuteSql(sql);
+        // dapper.ExecuteSql(sql);
     }
+}
 
 // use System Text Json to serialize
 var computerCopySystemText = System.Text.Json.JsonSerializer.Serialize(computersSystemText, options);
-File.WriteAllText("ComputersSystemText.json", computerCopySystemText);
+// File.WriteAllText("ComputersSystemText.json", computerCopySystemText);
 
 // use Newtonsoft to serialize
 var computerCopyNewtonsoft = JsonConvert.SerializeObject(computersNewtonsoft, settings);
-File.WriteAllText("ComputersNewtonsoft.json", computerCopyNewtonsoft);
+// File.WriteAllText("ComputersNewtonsoft.json", computerCopyNewtonsoft);
 
 static string EscapeSingleQuotes(string input)
 {

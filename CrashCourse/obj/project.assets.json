@@ -2,6 +2,22 @@
   "version": 3,
   "targets": {
     "net9.0": {
+      "AutoMapper/14.0.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.Extensions.Options": "8.0.0"
+        },
+        "compile": {
+          "lib/net8.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        },
+        "runtime": {
+          "lib/net8.0/AutoMapper.dll": {
+            "related": ".xml"
+          }
+        }
+      },
       "Dapper/2.1.72": {
         "type": "package",
         "compile": {
@@ -829,6 +845,21 @@
     }
   },
   "libraries": {
+    "AutoMapper/14.0.0": {
+      "sha512": "OC+1neAPM4oCCqQj3g2GJ2shziNNhOkxmNB9cVS8jtx4JbgmRzLcUOxB9Tsz6cVPHugdkHgCaCrTjjSI0Z5sCQ==",
+      "type": "package",
+      "path": "automapper/14.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "README.md",
+        "automapper.14.0.0.nupkg.sha512",
+        "automapper.nuspec",
+        "icon.png",
+        "lib/net8.0/AutoMapper.dll",
+        "lib/net8.0/AutoMapper.xml"
+      ]
+    },
     "Dapper/2.1.72": {
       "sha512": "ns4mGqQd9a/MhP8m6w556vVlZIa0/MfUu03zrxjZC/jlr1uVCsUac8bkdB+Fs98Llbd56rRSo1eZH5VVmeGZyw==",
       "type": "package",
@@ -2096,6 +2127,7 @@
   },
   "projectFileDependencyGroups": {
     "net9.0": [
+      "AutoMapper >= 14.0.0",
       "Dapper >= 2.1.72",
       "Microsoft.Data.SqlClient >= 7.0.0",
       "Microsoft.EntityFrameworkCore >= 9.0.0",
@@ -2148,6 +2180,10 @@
       "net9.0": {
         "targetAlias": "net9.0",
         "dependencies": {
+          "AutoMapper": {
+            "target": "Package",
+            "version": "[14.0.0, )"
+          },
           "Dapper": {
             "target": "Package",
             "version": "[2.1.72, )"
@@ -2196,5 +2232,17 @@
         "runtimeIdentifierGraphPath": "/Users/joedu/.dotnet/sdk/9.0.304/PortableRuntimeIdentifierGraph.json"
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1903",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'AutoMapper' 14.0.0 has a known high severity vulnerability, https://github.com/advisories/GHSA-rvv3-g6hj-g44x",
+      "libraryId": "AutoMapper",
+      "targetGraphs": [
+        "net9.0"
+      ]
+    }
+  ]
 }
