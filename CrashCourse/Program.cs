@@ -13,10 +13,10 @@ IConfiguration config = new ConfigurationBuilder().SetBasePath(basePath).AddJson
 var dapper = new DataContextDapper(config);
 var entityFramework = new DataContextEF(config);
 
-var rightNow = dapper.LoadDataSingle<DateTime>("SELECT GETDATE()");
+// var rightNow = dapper.LoadDataSingle<DateTime>("SELECT GETDATE()");
 
 
-Console.WriteLine(rightNow);
+// Console.WriteLine(rightNow);
 
 // var myComputer = new Computer
 // {
@@ -85,7 +85,24 @@ var computersNewtonsoft = JsonConvert.DeserializeObject<IEnumerable<Computer>>(c
 if (computersNewtonsoft != null)
     foreach (var computer in computersNewtonsoft)
     {
-        // Console.WriteLine(computer.Motherboard);
+        var sql = @"INSERT INTO TutorialAppSchema.Computer(
+     Motherboard,
+     HasWifi,
+     HasLTE,
+     CPUCores,
+     ReleaseDate,
+     Price,
+     VideoCard)
+ VALUES('" + EscapeSingleQuotes(computer.Motherboard)
+           + "','" + computer.HasWifi
+           + "','" + computer.HasLTE
+           + "','" + computer.CPUCores
+           + "','" + (computer.ReleaseDate?.ToString("yyyy-MM-dd") ?? "NULL")
+           + "','" + computer.Price
+           + "','" + EscapeSingleQuotes(computer.VideoCard)
+           + "')";
+
+        dapper.ExecuteSql(sql);
     }
 
 // use System Text Json to serialize
@@ -95,3 +112,8 @@ File.WriteAllText("ComputersSystemText.json", computerCopySystemText);
 // use Newtonsoft to serialize
 var computerCopyNewtonsoft = JsonConvert.SerializeObject(computersNewtonsoft, settings);
 File.WriteAllText("ComputersNewtonsoft.json", computerCopyNewtonsoft);
+
+static string EscapeSingleQuotes(string input)
+{
+    return input.Replace("'", "''");
+}
